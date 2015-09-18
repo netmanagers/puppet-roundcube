@@ -37,6 +37,6 @@ class roundcube::database {
   exec { 'reconfigure-roundcube':
     path        => '/usr/sbin:/usr/bin:/sbin:/bin',
     refreshonly => true,
-    command     => 'dpkg-reconfigure roundcube-core',
+    command     => 'dpkg-reconfigure roundcube-mysql',
   }
 }
