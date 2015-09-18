@@ -28,7 +28,7 @@ class roundcube::database {
   file { 'dbcommon_roundcube':
     ensure => present,
     path    => '/etc/dbconfig-common/roundcube.conf',
-    content => template('/database-debian.conf.erb'),
+    content => template('roundcube/database-debian.conf.erb'),
     require => Package['roundcube-database'],
     notify  => Exec['reconfigure-roundcube'],
   }
