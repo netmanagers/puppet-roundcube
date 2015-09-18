@@ -64,11 +64,9 @@ class roundcube (
   }
 
   ### Managed resources
-  if ! defined(Package[$roundcube::package]) {
-    package { $roundcube::package:
-      ensure  => $roundcube::manage_package,
-      noop    => $roundcube::bool_noops,
-    }
+  package { $roundcube::package:
+    ensure  => $roundcube::manage_package,
+    noop    => $roundcube::bool_noops,
   }
 
   ### Include custom class if $my_class is set
