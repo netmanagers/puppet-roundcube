@@ -20,6 +20,12 @@ class roundcube::params {
     default => 'roundcube',
   }
 
+  $manage_database = true
+  $database_backend = 'mysql'
+  $database_user = 'roundcube'
+  $database_password = 'roundcube'
+  $database_db = 'roundcube'
+
   # General Settings
   $my_class = ''
   $version = 'present'

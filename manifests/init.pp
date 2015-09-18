@@ -51,6 +51,11 @@ class roundcube (
   $version             = params_lookup( 'version' ),
   $absent              = params_lookup( 'absent' ),
   $noops               = params_lookup( 'noops' ),
+  $database_db         = params_lookup( 'database_db' ),
+  $manage_database     = params_lookup( 'manage_database' ),
+  $database_backend    = params_lookup( 'database_backend' ),
+  $database_user       = params_lookup( 'database_user' ),
+  $database_password   = params_lookup( 'database_password' ),
   $package             = params_lookup( 'package' )
   ) inherits roundcube::params {
 
@@ -67,6 +72,10 @@ class roundcube (
   package { $roundcube::package:
     ensure  => $roundcube::manage_package,
     noop    => $roundcube::bool_noops,
+  }
+
+  if $roundcube::manage_database {
+    include roundcube::database
   }
 
   ### Include custom class if $my_class is set
