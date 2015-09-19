@@ -114,15 +114,8 @@ class roundcube (
     require => $real_manage_database,
   }
 
-  file { $array_plugins_config:
-    ensure  => present,
-    path    => "/etc/roundcube/plugins/${title}/config.inc.php",
-    source  => "puppet:///modules/roundcube/${title}.config.inc.php",
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
-    require => File['roundcube_config'],
-  }
+  # Add the config file for the different plugins
+  roundcube::plugin_config { $array_plugins_config: }
 
   ### Include custom class if $my_class is set
   if $roundcube::my_class {
