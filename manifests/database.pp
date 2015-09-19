@@ -23,7 +23,6 @@ class roundcube::database {
     path    => '/var/cache/debconf/roundcube-core.seeds',
     content => template('roundcube/rouncube-core.preseed.erb'),
     mode    => '0600',
-    require => Package['roundcube-database'],
     notify  => Exec['reconfigure-roundcube'],
   }
 
