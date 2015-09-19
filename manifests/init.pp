@@ -51,6 +51,8 @@ class roundcube (
   $version             = params_lookup( 'version' ),
   $absent              = params_lookup( 'absent' ),
   $noops               = params_lookup( 'noops' ),
+  $des_key             = params_lookup( 'des_key' ),
+  $plugins             = params_lookup( 'plugins' ),
   $database_db         = params_lookup( 'database_db' ),
   $manage_database     = params_lookup( 'manage_database' ),
   $database_backend    = params_lookup( 'database_backend' ),
@@ -74,6 +76,14 @@ class roundcube (
     false => unset,
   }
 
+  $array_plugins = is_array($roundcube::plugins) ? {
+    false     => $roundcube::plugins ? {
+      ''      => [],
+      default => [$roundcube::plugins],
+    },
+    default   => $roundcube::plugins,
+  }
+
   if $roundcube::manage_database {
     include roundcube::database
   }
@@ -83,6 +93,16 @@ class roundcube (
     ensure  => $roundcube::manage_package,
     require => $real_manage_database,
     noop    => $roundcube::bool_noops,
+  }
+
+  file { 'roundcube_config':
+    ensure => present,
+    path    => '/etc/roundcube/config.inc.php',
+    content => template('roundcube/config.inc.php.erb'),
+    mode    => '0640',
+    owner   => 'root',
+    group   => 'www-data',
+    require => $real_manage_database,
   }
 
   ### Include custom class if $my_class is set

@@ -23,8 +23,11 @@ class roundcube::params {
   $manage_database = true
   $database_backend = 'mysql'
   $database_user = 'roundcube'
-  $database_password = 'roundcube'
+  $database_password = fqdn_rand_string(20)
   $database_db = 'roundcube'
+
+  $des_key = fqdn_rand_string(24)
+  $plugins = []
 
   # General Settings
   $my_class = ''

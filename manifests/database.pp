@@ -13,7 +13,7 @@ class roundcube::database {
 
   ### Managed resources
   $real_db_password = $roundcube::database_password ? {
-    ''      => fqdn_rand(100000000000),
+    ''      => fqdn_rand_string(20),
     default => $roundcube::database_password,
   }
 
