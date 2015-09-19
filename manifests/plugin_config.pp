@@ -5,7 +5,7 @@
 # == Parameters
 # plugin name
 
-define roundcube::plugin_name() {
+define roundcube::plugin_config() {
   file { $name:
     ensure  => present,
     path    => "/etc/roundcube/plugins/${name}/config.inc.php",
