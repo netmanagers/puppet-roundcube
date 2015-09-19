@@ -74,7 +74,7 @@ $config['des_key'] = '<%= @des_key %>';
 
 // List of active plugins (in plugins/ directory)
 $config['plugins'] = array(
-<% @plugins.each do |plugin| %>
+<% @plugins.each do |plugin| -%>
    '<%= plugin %>',
 <% end -%>
 );
