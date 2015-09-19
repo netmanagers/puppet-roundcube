@@ -28,6 +28,7 @@ class roundcube::params {
 
   $des_key = fqdn_rand_string(24)
   $plugins = []
+  $plugins_config = []
 
   # General Settings
   $my_class = ''
