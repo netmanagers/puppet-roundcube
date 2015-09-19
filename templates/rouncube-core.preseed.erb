@@ -1,0 +1,58 @@
+# This file is managed by Puppet. DO NOT EDIT.
+#
+roundcube-core	roundcube/mysql/admin-pass	password	<%= scope['mysql::root_password'] %>
+# PostgreSQL application password for roundcube:
+roundcube-core	roundcube/pgsql/app-pass	password	<%= @database_password %>
+roundcube-core	roundcube/app-password-confirm	password	<%= @database_password %>
+roundcube-core	roundcube/password-confirm	password	
+roundcube-core	roundcube/pgsql/admin-pass	password	<%= scope['mysql::root_password'] %>
+# MySQL application password for roundcube:
+roundcube-core	roundcube/mysql/app-pass	password	<%= @database_password %>
+roundcube-core	roundcube/reconfigure-webserver	multiselect	apache2, lighttpd
+roundcube-core	roundcube/pgsql/authmethod-admin	select	ident
+roundcube-core	roundcube/pgsql/manualconf	note	
+roundcube-core	roundcube/remote/port	string	
+roundcube-core	roundcube/internal/skip-preseed	boolean	true
+roundcube-core	roundcube/mysql/admin-user	string	root
+roundcube-core	roundcube/pgsql/admin-user	string	postgres
+roundcube-core	roundcube/hosts	string	
+roundcube-core	roundcube/restart-webserver	boolean	true
+#  database name for roundcube:
+roundcube-core	roundcube/db/dbname	string	<%= @database_db %>
+# Perform upgrade on database for roundcube with dbconfig-common?
+roundcube-core	roundcube/dbconfig-upgrade	boolean	true
+roundcube-core	roundcube/missing-db-package-error	select	abort
+# Database type to be used by roundcube:
+roundcube-core	roundcube/database-type	select	<%= @database_backend %>
+#  username for roundcube:
+roundcube-core	roundcube/db/app-user	string	<%= @database_user %>
+# Configure database for roundcube with dbconfig-common?
+roundcube-core	roundcube/dbconfig-install	boolean	true
+# Reinstall database for roundcube?
+roundcube-core	roundcube/dbconfig-reinstall	boolean	false
+# Do you want to purge the database for roundcube?
+roundcube-core	roundcube/purge	boolean	false
+# Host name of the  database server for roundcube:
+roundcube-core	roundcube/remote/host	select	
+#  storage directory for roundcube:
+roundcube-core	roundcube/db/basepath	string	
+roundcube-core	roundcube/pgsql/no-empty-passwords	error	
+roundcube-core	roundcube/pgsql/authmethod-user	select	password
+# Connection method for PostgreSQL database of roundcube:
+roundcube-core	roundcube/pgsql/method	select	unix socket
+# Host running the  server for roundcube:
+roundcube-core	roundcube/remote/newhost	string	
+roundcube-core	roundcube/install-error	select	abort
+roundcube-core	roundcube/remove-error	select	abort
+# Deconfigure database for roundcube with dbconfig-common?
+roundcube-core	roundcube/dbconfig-remove	boolean	
+roundcube-core	roundcube/passwords-do-not-match	error	
+# What do you want to do about modified configuration file roundcube.conf?
+# Connection method for MySQL database of roundcube:
+roundcube-core	roundcube/mysql/method	select	unix socket
+roundcube-core	roundcube/pgsql/changeconf	boolean	false
+roundcube-core	roundcube/internal/reconfiguring	boolean	false
+# Do you want to back up the database for roundcube before upgrading?
+roundcube-core	roundcube/upgrade-backup	boolean	true
+roundcube-core	roundcube/upgrade-error	select	abort
+roundcube-core	roundcube/language	select	es_AR

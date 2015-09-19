@@ -12,25 +12,33 @@ class roundcube::database {
   include roundcube
 
   ### Managed resources
-  package { 'roundcube-database':
-    ensure  => $roundcube::manage_package,
-    name    => "roundcube-${roundcube::database_backend}",
-    noop    => $roundcube::noops,
-    require => Package['roundcube'],
-  }
-
   $real_db_password = $roundcube::database_password ? {
     ''      => fqdn_rand(100000000000),
     default => $roundcube::database_password,
   }
 
-  # DBcommon file, Debian specific
-  file { 'dbcommon_roundcube':
+  # Debian preseed for roundcube-core
+  file { 'roundcube_database_preseed':
     ensure => present,
-    path    => '/etc/dbconfig-common/roundcube.conf',
-    content => template('roundcube/database-debian.conf.erb'),
+    path    => '/var/cache/debconf/roundcube-core.seeds',
+    content => template('roundcube/rouncube-core.preseed.erb'),
     mode    => '0600',
     require => Package['roundcube-database'],
+    notify  => Exec['reconfigure-roundcube'],
+  }
+
+  package { 'roundcube-core':
+    ensure       => $roundcube::manage_package,
+    noop         => $roundcube::noops,
+    require      => File['roundcube_database_preseed'],
+    responsefile => '/var/cache/debconf/roundcube-core.seeds',
+  }
+
+  package { 'roundcube-database':
+    ensure  => $roundcube::manage_package,
+    name    => "roundcube-${roundcube::database_backend}",
+    noop    => $roundcube::noops,
+    require => Package['roundcube-core'],
     notify  => Exec['reconfigure-roundcube'],
   }
 

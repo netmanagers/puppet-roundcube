@@ -61,6 +61,7 @@ class roundcube (
 
   $bool_absent=any2bool($absent)
   $bool_noops=any2bool($noops)
+  $bool_manage_database=any2bool($manage_database)
 
   ### Definition of some variables used in the module
   $manage_package = $roundcube::bool_absent ? {
@@ -68,14 +69,20 @@ class roundcube (
     false => $roundcube::version,
   }
 
-  ### Managed resources
-  package { $roundcube::package:
-    ensure  => $roundcube::manage_package,
-    noop    => $roundcube::bool_noops,
+  $real_manage_database = $roundcube::bool_manage_database ? {
+    true  => File['roundcube_database_preseed'],
+    false => unset,
   }
 
   if $roundcube::manage_database {
     include roundcube::database
+  }
+
+  ### Managed resources
+  package { $roundcube::package:
+    ensure  => $roundcube::manage_package,
+    require => $real_manage_database,
+    noop    => $roundcube::bool_noops,
   }
 
   ### Include custom class if $my_class is set
