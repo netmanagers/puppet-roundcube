@@ -1,5 +1,6 @@
 <?php
-
+// This file is managed by Puppet. DO NOT EDIT.
+//
 // Password Plugin options
 // -----------------------
 // A driver to use for password change. Default: "sql".
