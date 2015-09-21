@@ -5,7 +5,10 @@
 # == Parameters
 # plugin name
 
-define roundcube::plugin_config() {
+define roundcube::plugin_config(
+  $prefix  = params_lookup( 'prefix' ),
+  $options = params_lookup( 'options' ),
+) {
   file { $name:
     ensure  => present,
     path    => "/etc/roundcube/plugins/${name}/config.inc.php",
