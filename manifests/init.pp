@@ -107,7 +107,7 @@ class roundcube (
   }
 
   # Add the config file for the different plugins
-  create_resources('roundcube::plugin_config', $array_plugins_config )
+  create_resources('roundcube::plugin_config', $plugins_config )
 
   ### Include custom class if $my_class is set
   if $roundcube::my_class {
