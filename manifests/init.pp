@@ -85,14 +85,6 @@ class roundcube (
     default   => $roundcube::plugins,
   }
 
-  $array_plugins_config = is_array($roundcube::plugins_config) ? {
-    false     => $roundcube::plugins_config ? {
-      ''      => [],
-      default => [$roundcube::plugins_config],
-    },
-    default   => $roundcube::plugins_config,
-  }
-
   if $roundcube::manage_database {
     include roundcube::database
   }
@@ -115,7 +107,7 @@ class roundcube (
   }
 
   # Add the config file for the different plugins
-  roundcube::plugin_config { $array_plugins_config: }
+  create_resources('roundcube::plugin_config', $array_plugins_config )
 
   ### Include custom class if $my_class is set
   if $roundcube::my_class {

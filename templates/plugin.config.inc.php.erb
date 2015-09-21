@@ -1,0 +1,12 @@
+<?php
+// This file is managed by Puppet. DO NOT EDIT.
+//
+// Options' reference:
+// http://trac.roundcube.net/browser/github/plugins/*/config.inc.php.dist
+
+// Warning... does not handle array as a value type yet :/
+<% @plugin_config['options'].map do |key, value| -%>
+$<%= @plugin_config['prefix'] %>['<%= key %>'] = <% if value.class == String %>'<% end %><%= value %><% if value.class == String %>'<% end %>;
+<% end %>
+
+?>
