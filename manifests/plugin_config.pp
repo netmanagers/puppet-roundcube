@@ -10,12 +10,12 @@ define roundcube::plugin_config(
   $options = params_lookup( 'options' ),
 ) {
   file { $name:
-    ensure   => present,
-    path     => "/etc/roundcube/plugins/${name}/config.inc.php",
-    template => template('roundcube/plugin.config.inc.php.erb'),
-    mode     => '0644',
-    owner    => 'root',
-    group    => 'root',
-    require  => File['roundcube_config'],
+    ensure  => present,
+    path    => "/etc/roundcube/plugins/${name}/config.inc.php",
+    content => template('roundcube/plugin.config.inc.php.erb'),
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => File['roundcube_config'],
   }
 }
