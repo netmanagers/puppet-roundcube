@@ -6,7 +6,6 @@
 
 // Warning... does not handle array as a value type yet :/
 <% @options.map do |key, value| -%>
-$<%= @prefix %>['<%= key %>'] = <% if value.class == String %>'<% end %><%= value %><% if value.class == String %>'<% end %>;
+$<%= @prefix %>['<%= key %>'] = <% if value.class == String && value != 'null' %>'<% end %><%= value %><% if value.class == String %>'<% end %>;
 <% end %>
-
 ?>
