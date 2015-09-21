@@ -13,9 +13,9 @@ define roundcube::plugin_config(
     ensure  => present,
     path    => "/etc/roundcube/plugins/${name}/config.inc.php",
     content => template('roundcube/plugin.config.inc.php.erb'),
-    mode    => '0644',
+    mode    => '0640',
     owner   => 'root',
-    group   => 'root',
+    group   => 'www-data',
     require => File['roundcube_config'],
   }
 }
