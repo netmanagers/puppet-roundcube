@@ -52,6 +52,7 @@ class roundcube (
   $absent              = params_lookup( 'absent' ),
   $noops               = params_lookup( 'noops' ),
   $des_key             = params_lookup( 'des_key' ),
+  $force_https         = params_lookup( 'force_https' ),
   $plugins             = params_lookup( 'plugins' ),
   $plugins_config      = params_lookup( 'plugins_config' ),
   $database_db         = params_lookup( 'database_db' ),

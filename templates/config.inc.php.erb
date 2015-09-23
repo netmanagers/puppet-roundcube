@@ -72,6 +72,11 @@ $config['product_name'] = 'Roundcube Webmail';
 // YOUR KEY MUST BE DIFFERENT THAN THE SAMPLE VALUE FOR SECURITY REASONS
 $config['des_key'] = '<%= @des_key %>';
 
+// enforce connections over https
+// with this option enabled, all non-secure connections will be redirected.
+// set the port for the ssl connection as value of this option if it differs from the default 443
+$config['force_https'] = <%= @force_https %>;
+
 // List of active plugins (in plugins/ directory)
 $config['plugins'] = array(
 <% @plugins.each do |plugin| -%>
