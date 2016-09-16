@@ -26,6 +26,9 @@ class roundcube::params {
   $database_password = fqdn_rand_string(20)
   $database_db = 'roundcube'
 
+  $smtp_server = ''
+  $username_domain = ''
+  $username_domain_forced = false
   $force_https = false
   $des_key = fqdn_rand_string(24)
   $plugins = []

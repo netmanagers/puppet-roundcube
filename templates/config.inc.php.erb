@@ -45,7 +45,7 @@ $config['default_host'] = array("localhost");
 // %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
 // %z - IMAP domain (IMAP hostname without the first part)
 // For example %n = mail.domain.tld, %t = domain.tld
-$config['smtp_server'] = '';
+$config['smtp_server'] = '<%= @smtp_server %>';
 
 // SMTP port (default is 25; use 587 for STARTTLS or 465 for the
 // deprecated SSL over SMTP (aka SMTPS))
@@ -58,6 +58,18 @@ $config['smtp_user'] = '%u';
 // SMTP password (if required) if you use %p as the password Roundcube
 // will use the current user's password for login
 $config['smtp_pass'] = '%p';
+
+// Automatically add this domain to user names for login
+// Only for IMAP servers that require full e-mail addresses for login
+// Specify an array with 'host' => 'domain' values to support multiple hosts
+// Supported replacement variables:
+// %h - user's IMAP hostname
+// %n - hostname ($_SERVER['SERVER_NAME'])
+// %t - hostname without the first part
+// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
+// %z - IMAP domain (IMAP hostname without the first part)
+// For example %n = mail.domain.tld, %t = domain.tld
+$config['username_domain'] = '<%= @username_domain %>';
 
 // provide an URL where a user can get support for this Roundcube installation
 // PLEASE DO NOT LINK TO THE ROUNDCUBE.NET WEBSITE HERE!
